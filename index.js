@@ -15,6 +15,7 @@ mongodb.connect(process.env.MONGOLAB_URI,(err,d)=>{
 app.get('/api/imagesearch/:term',(req,res) => {
     console.log(req.query.offset);
     const GoogleImages = require('google-images');
+    // exposing API key is bad, but this is not a critical app 
     const client = new GoogleImages('005239928322090407730:x63wsgcocgy', 'AIzaSyAcO8M0Ev4SDw1Khcb-XdfjaOu8pw5KFwc');
     client.search(req.params.term,{page: req.query.offset||1}).then(function(results){
         db.collection('searchTerms').insert({
